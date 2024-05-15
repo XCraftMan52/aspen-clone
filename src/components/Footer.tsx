@@ -7,7 +7,8 @@ function Footer() {
       <div className='flex flex-wrap justify-between p-2'>
         <p>
           {/* Copy symbol in html */}
-          &copy; 2023 Follett School Solutions, Inc. All Rights Reserved.
+          &copy; {new Date().getFullYear()} Follett School Solutions, Inc. All
+          Rights Reserved.
         </p>
         <p>
           <a href='https://www.follett.com/'>Follet School Solutions</a> |{" "}

@@ -1,23 +1,25 @@
 "use client";
 import React from "react";
-
-export default function LoginBox() {
+export interface SecurityBoxProps {
+  securityQuestion: string;
+  securityQuestionAnswer: string;
+}
+export default function SecurityBox({
+  securityQuestion,
+  securityQuestionAnswer,
+}: SecurityBoxProps) {
   function submitForm() {
     return (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
-      let loginId = data.get("loginId")?.toString();
-      let password = data.get("password")?.toString();
-      let expectedLoginId = process.env.username?.toLowerCase();
-      let expectedPassword = process.env.password?.toLowerCase();
-      console.log(expectedLoginId);
-      console.log(expectedPassword);
+      let answer = data.get("answer")?.toString();
+      //get answer from
 
-      if (loginId !== expectedLoginId || password !== expectedPassword) {
-        alert("Login Information is incorrect!! Please try again.");
+      if (answer !== securityQuestionAnswer) {
+        alert("Security Question answer is incorrect!! Please try again.");
         return;
       }
-      window.location.href = "/securityquestion";
+      window.location.href = "/securityQuestion2";
     };
   }
   return (
@@ -36,17 +38,11 @@ export default function LoginBox() {
           onSubmit={submitForm()}
           className='flex flex-col p-2'
         >
-          <label className='text-md font-bold'>Login ID</label>
+          <label className='text-md font-bold'>{securityQuestion}</label>
           <input
             className='border-2 border-gray-400'
             type='text'
-            name='loginId'
-          />
-          <label className='text-lg'>Password</label>
-          <input
-            className='border-2 border-gray-400 rounded-md'
-            type='password'
-            name='password'
+            name='answer'
           />
           <div className='flex justify-center'>
             <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
